@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+  --color-gold: #c9a961;
+  --color-gold-light: #dfc089;
+  --color-gold-dark: #9a7f3f;
+  --color-ink: #0a0a0a;
+  --color-ink-light: #141414;
+  --color-ink-surface: #1a1a1a;
+  --color-ink-border: #2a2a2a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0a0a0a;
+  color: #e5e5e5;
+}
+
+::selection {
+  background-color: #c9a961;
+  color: #0a0a0a;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c9a961;
+}
+
+/* Decorative grain/dark texture */
+.grain-bg {
+  position: relative;
+}
+.grain-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle gold sheen animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.gold-shimmer {
+  background: linear-gradient(90deg, #c9a961 0%, #f5e6c8 50%, #c9a961 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Marquee animation for services ribbon */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee {
+  animation: marquee 30s linear infinite;
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+/* Vintage card styling */
+.vintage-card {
+  background: linear-gradient(145deg, #1a1a1a, #141414);
+  border: 1px solid #2a2a2a;
+  position: relative;
+}
+.vintage-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  background: linear-gradient(145deg, rgba(201,169,97,0.2), transparent) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.vintage-card:hover::before {
+  opacity: 1;
+}
+
+/* Barber pole stripe */
+.barber-stripe {
+  background: repeating-linear-gradient(
+    45deg,
+    #c9a961,
+    #c9a961 10px,
+    #0a0a0a 10px,
+    #0a0a0a 20px,
+    #ffffff00 20px,
+    #ffffff00 30px
+  );
+}
+
+/* Booking step connector */
+.step-connector {
+  background: linear-gradient(90deg, #c9a961 var(--progress, 0%), #2a2a2a var(--progress, 0%));
+}
+
+/* Time slot button */
+.time-slot {
+  transition: all 0.2s ease;
+}
+.time-slot:hover:not(:disabled) {
+  border-color: #c9a961;
+  color: #c9a961;
+}
+.time-slot.selected {
+  background: #c9a961;
+  color: #0a0a0a;
+  border-color: #c9a961;
+  font-weight: 600;
+}
+.time-slot:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Testimonial card */
+.testimonial-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.testimonial-card:hover {
+  transform: translateY(-4px);
+}
