@@ -18,6 +18,14 @@ const Instagram = ({ className }: { className?: string }) => (
 const BARBERSHOP_WHATSAPP_NUMBER = '5588988150887';
 const BARBERSHOP_PHONE_DISPLAY = '(88) 98815-0887';
 
+const IMAGES = {
+  heroBarber: 'https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=80',
+  barberPortrait: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=800&q=80',
+  haircut: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=800&q=80',
+  beardTrim: 'https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=800&q=80',
+  interior: 'https://images.unsplash.com/photo-1512690459411-b9245aed614b?auto=format&fit=crop&w=1200&q=80'
+};
+
 /* ============== DATA ============== */
 const services = [
   {
@@ -26,7 +34,7 @@ const services = [
     description: 'Corte moderno ou clássico, com acabamento perfeito',
     price: 'R$ 60',
     icon: Scissors,
-    image: '/images/haircut.jpg',
+    image: IMAGES.haircut,
     duration: '45 min'
   },
   {
@@ -35,7 +43,7 @@ const services = [
     description: 'Toalha quente, navalha e produtos premium',
     price: 'R$ 50',
     icon: Zap,
-    image: '/images/beard-trim.jpg',
+    image: IMAGES.beardTrim,
     duration: '35 min'
   },
   {
@@ -44,7 +52,7 @@ const services = [
     description: 'Cabelo + Barba, a experiência completa',
     price: 'R$ 95',
     icon: Crown,
-    image: '/images/hero-barber.jpg',
+    image: IMAGES.heroBarber,
     duration: '1h 20min',
     featured: true
   },
@@ -54,7 +62,7 @@ const services = [
     description: 'Design e acabamento com navalha',
     price: 'R$ 25',
     icon: Sparkles,
-    image: '/images/haircut.jpg',
+    image: IMAGES.haircut,
     duration: '15 min'
   }
 ];
@@ -100,13 +108,13 @@ const timeSlots = [
   '17:00', '17:30', '18:00', '18:30', '19:00'
 ];
 
-/* Helper: generate dates for next 14 days */
+/* Helper: generate dates for next 30 days (full month) */
 function generateDates() {
   const dates: { date: Date; day: number; weekday: string; month: string; disabled: boolean }[] = [];
   const today = new Date();
   const weekdays = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
   const months = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
-  for (let i = 1; i <= 14; i++) {
+  for (let i = 0; i < 30; i++) {
     const d = new Date(today);
     d.setDate(today.getDate() + i);
     const dow = d.getDay();
@@ -215,8 +223,9 @@ function Hero() {
       {/* Background image */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero-barber.jpg"
+          src={IMAGES.heroBarber}
           alt="Barbearia Elite"
+          referrerPolicy="no-referrer"
           className="w-full h-full object-cover opacity-25 sm:opacity-30"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-ink via-ink/75 to-ink"></div>
@@ -276,30 +285,31 @@ function Hero() {
           </div>
         </div>
 
-        <div className="hidden lg:block relative">
-          <div className="relative aspect-[3/4] rounded-sm overflow-hidden border-2 border-gold/20">
+        <div className="relative mt-8 lg:mt-0 max-w-sm sm:max-w-md lg:max-w-none mx-auto w-full">
+          <div className="relative aspect-[4/5] sm:aspect-[3/4] rounded-sm overflow-hidden border-2 border-gold/20 shadow-2xl shadow-black/80">
             <img
-              src="/images/barber-portrait.jpg"
+              src={IMAGES.barberPortrait}
               alt="Barbeiro profissional"
+              referrerPolicy="no-referrer"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"></div>
           </div>
-          <div className="absolute -bottom-6 -left-6 bg-ink-light border border-ink-border p-5 rounded-sm shadow-2xl shadow-black/50 backdrop-blur-sm">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center">
-                <Award className="w-6 h-6 text-gold" />
+          <div className="absolute -bottom-4 left-2 sm:-bottom-6 sm:-left-6 bg-ink-light/95 border border-ink-border p-3.5 sm:p-5 rounded-sm shadow-2xl shadow-black/50 backdrop-blur-md">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center flex-shrink-0">
+                <Award className="w-5 h-5 sm:w-6 sm:h-6 text-gold" />
               </div>
               <div>
-                <div className="text-xs text-gold tracking-wider uppercase">Certificado</div>
-                <div className="text-white font-semibold text-sm">Premium Quality</div>
+                <div className="text-[10px] sm:text-xs text-gold tracking-wider uppercase">Certificado</div>
+                <div className="text-white font-semibold text-xs sm:text-sm">Premium Quality</div>
               </div>
             </div>
           </div>
-          <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-gold/30 rounded-full flex items-center justify-center bg-ink-light">
+          <div className="absolute -top-3 right-2 sm:-top-4 sm:-right-4 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-2 border-gold/30 rounded-full flex items-center justify-center bg-ink-light/95 backdrop-blur-md shadow-xl">
             <div className="text-center">
-              <div className="font-serif text-2xl font-bold text-gold">4.9</div>
-              <div className="text-[9px] text-gray-400 uppercase tracking-widest">Google</div>
+              <div className="font-serif text-lg sm:text-xl md:text-2xl font-bold text-gold">4.9</div>
+              <div className="text-[8px] sm:text-[9px] text-gray-400 uppercase tracking-widest">Google</div>
             </div>
           </div>
         </div>
@@ -404,6 +414,7 @@ function Services({ onBook }: { onBook: (serviceId: string) => void }) {
                     <img
                       src={s.image}
                       alt={s.name}
+                      referrerPolicy="no-referrer"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent sm:bg-gradient-to-r sm:from-transparent sm:to-ink-surface"></div>
@@ -675,8 +686,15 @@ function BookingWidget({ preselectedService }: { preselectedService: string | nu
             <p className="text-gray-400 mb-6 sm:mb-8 text-xs sm:text-sm">Selecione o melhor dia e horário para você:</p>
 
             <div className="mb-6 sm:mb-8">
-              <h4 className="text-xs sm:text-sm font-semibold text-gold uppercase tracking-wider sm:tracking-widest mb-3 sm:mb-4">Data disponível</h4>
-              <div className="flex gap-2 overflow-x-auto pb-3 -mx-2 px-2 sm:mx-0 sm:px-0 no-scrollbar">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h4 className="text-xs sm:text-sm font-semibold text-gold uppercase tracking-wider sm:tracking-widest">
+                  Datas disponíveis (Mês Completo)
+                </h4>
+                <span className="text-[10px] sm:text-xs text-gray-400 font-medium flex items-center gap-1">
+                  ← Arraste a barra para ver mais →
+                </span>
+              </div>
+              <div className="flex gap-2 overflow-x-auto pb-3 pt-1 -mx-2 px-2 sm:mx-0 sm:px-0 date-scrollbar">
                 {dates.map((d, i) => {
                   const isSelected = selectedDate?.toDateString() === d.date.toDateString();
                   return (
@@ -935,8 +953,9 @@ function LocationFooter() {
           {/* Map placeholder */}
           <div className="relative rounded-sm overflow-hidden border border-ink-border min-h-[340px] sm:min-h-[400px] group">
             <img
-              src="/images/barbershop-interior.jpg"
+              src={IMAGES.interior}
               alt="Interior da barbearia"
+              referrerPolicy="no-referrer"
               className="w-full h-full object-cover absolute inset-0 opacity-60 group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/60 to-transparent"></div>

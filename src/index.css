@@ -27,6 +27,27 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Custom horizontal scrollbar for dates carousel */
+.date-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+.date-scrollbar::-webkit-scrollbar-track {
+  background: #141414;
+  border-radius: 4px;
+}
+.date-scrollbar::-webkit-scrollbar-thumb {
+  background: #3a3a3a;
+  border-radius: 4px;
+  border: 1px solid #2a2a2a;
+}
+.date-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #c9a961;
+}
+.date-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a #141414;
+}
+
 /* Hide scrollbar for clean horizontal scrolls while keeping functionality */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
