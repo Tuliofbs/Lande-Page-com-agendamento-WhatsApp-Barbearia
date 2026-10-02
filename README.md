@@ -103,7 +103,7 @@ npm run build
 
 ## 👤 Autor
 
-Criado por **Seu Nome**. 
+Criado por **ConecDev**. 
 
 Se este projeto te ajudou ou inspirou, deixe uma ⭐ no repositório!
 
